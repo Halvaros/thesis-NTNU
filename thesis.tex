@@ -1,7 +1,7 @@
 \documentclass[british,titlepage]{ntnuthesis}
 
 \title{An NTNU Thesis \LaTeX{} Document Class}
-\shorttitle{An NTNU Thesis Document Class}
+\shorttitle{Convergence of FtL with space dependent flux }
 \author{Community of Practice in Computer Science Education at NTNU}
 \shortauthor{CoPCSE$@$NTNU}
 \date{CC-BY \ntnuthesisdate}
@@ -26,19 +26,20 @@
 \newtheorem{proposition}{Proposition}
 
 
-\usepackage[options]{natbib}
-\usepackage[backend = biber, style = apa, firstinits = true]{biblatex}
+
+\usepackage[backend = biber, style = authoryear, firstinits = true]{biblatex}
 %my packages
 
+%\usepackage{natbib}
 
-\addbibresource{thesis.bib}
-
+\addbibresource{HalvardMaster.bib}
 
 \input{glossary.tex} % add glossary and acronym lists before document
 
 
-\begin{document}
 
+\begin{document}
+%\bibliographystyle{abbrv}
 \input{chapters/0a-abstract.tex}
 \input{chapters/0b-sammendrag.tex}
 
@@ -57,6 +58,7 @@
 
 \chapter*{\bibname}
 \printbibliography[heading=none]
+
 
 \input{chapters/papers.tex}
 
