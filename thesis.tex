@@ -1,15 +1,17 @@
 \documentclass[british,titlepage]{ntnuthesis}
 
-\title{An NTNU Thesis \LaTeX{} Document Class}
-\shorttitle{Convergence of FtL with space dependent flux }
-\author{Community of Practice in Computer Science Education at NTNU}
+\title{A Connection Between Modelling Paradigms \\ \large The Convergence of the Follow-the-Leader Model to the Lighthill-Whitham-Richards model with a space dependent velocity, in the Many Particle Limit}
+\shorttitle{Convergence of FtL with space dependent flux}
+\author{Halvard Olsen Storbugt}
 \shortauthor{CoPCSE$@$NTNU}
-\date{CC-BY \ntnuthesisdate}
+\date{\today}
 
+\usepackage{graphicx}
 
 \usepackage{mathrsfs}
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}
+\newtheorem{mythm}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newtheorem{corollary}{Corollary}[lemma]
 
@@ -19,14 +21,19 @@
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}
 
-\theoremstyle{defintion}
-\newtheorem{formula}{Formula}
+\newtheorem{example}{Example}
 
 \theoremstyle{proposition}
 \newtheorem{proposition}{Proposition}
 
+\theoremstyle{definition}
+\newtheorem{formula}{Formula}
 
 
+%use package
+\usepackage[colorlinks]{hyperref}
+%\def\avint{\mathop{\rlap{--}\!rl\!\int}\nolimits}
+\def\avint{\mathop{\,\rlap{-}\!\!\int}\nolimits}
 \usepackage[backend = biber, style = numeric, autocite=plain, firstinits = true]{biblatex}
 %my packages
 
@@ -36,33 +43,35 @@
 
 \input{glossary.tex} % add glossary and acronym lists before document
 
+\usepackage[noabbrev]{cleveref}
 
 
 \begin{document}
 %\bibliographystyle{abbrv}
 \input{chapters/0a-abstract.tex}
 \input{chapters/0b-sammendrag.tex}
+\input{chapters/0c-acknowledgements.tex}
 
 \tableofcontents
-\listoffigures
-\listoftables
-\lstlistoflistings
+%\listoffigures
+%\listoftables
+%\lstlistoflistings
 
-\printglossary[type=\acronymtype] % Print acronyms
-\printglossary                    % Print glossary
+%\printglossary[type=\acronymtype] % Print acronyms
+%\printglossary                    % Print glossary
 
 \input{chapters/1-introduction}
 \input{chapters/2-usage.tex}
-\input{chapters/3-structure.tex}
+%\input{chapters/3-structure.tex}
 \input{chapters/4-conclusion.tex}
 
 \chapter*{\bibname}
 \printbibliography[heading=none]
 
 
-\input{chapters/papers.tex}
+%\input{chapters/papers.tex}
 
-\appendix
-\input{appendices/a-appendix.tex}
+%\appendix
+%\input{appendices/a-appendix.tex}
 
 \end{document}
