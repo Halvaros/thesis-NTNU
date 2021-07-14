@@ -1,19 +1,30 @@
 \chapter{Introduction}
 
+\iffalse
+why its called follow the leader. 
+Disposisjon.
+	- There are different ways to approach the micro-macro limit
+	- On the different philosophies
+	- Different levels of mathematical complexity, distinct description for different phenomenon.
+
 On the background in traffic modelling
 Problemstilling: 
-The present paper aims at examining the connection between to modelling paradigms for traffic flows. It has been established that there exist a connection between microscopic follow-the-leader (FtL) model and the classic Lighthill and Whitham model, in the so-called many particle limit. FtL models vehicular traffic dynamics using a discrete set of vehicle-driver units that populate and propagate on a unidirectional road. As the number of particles increase and the length of each car decreases in such a way that preserves the total mass, the countable system of ODEs converge to a hyperbolic partial differetial equation, which can be viewed as a certain type of uncountable collection of ODEs. Partial differential equations are a generalisation of ODEs in several dimensions. To be precise, we concern ourselves with the problem of finding pairs (FtL, SCL) such that
-
-\begin{equation}\label{FtL}
-    \frac{dx_n}{dt} = k(x_n)v(1/s_n). -> \rho_t + f(\rho,x)_x = 0,
+\fi
+The present paper establishes a connection between two modelling paradigms for traffic flows. The model in question is the  first order Follow-the-Leader model  
+\begin{equation} \label{intro:FtL}
+	 \frac{dz_{i-1/2}}{dt} = k(z_{i-1/2})v\left(\frac{l}{z_{i+1/2} - z_{i-1/2}}\right) \text{ for } i \in \{1,...,N\} \,\, N \in \N
 \end{equation}
-in some appropriate sense. If such a relation can be established, the microscopic model can be seen as a numerical approximation to the macroscopic approach. The theory behind the two modelling paradigms are very different, and such a connection is of independent interest. The motivation behind this approach is to examine This has been done before -> link to papers.
+Each vehicle is described by a particle, where the particles are related by a system of ordinary differential equations. $l$ models the car length of each vehicle. In the follow the leader model, any vehicle will adjust its speed in accordance with the distance to the vehicle it follows. The $k$ function allows the velocity of a vehicle to also depends on its position. This can model an accident or construction work, which will affect the speed-limit. The model is called first order, since it only involves the first derivative of each particle. The model \eqref{intro:FtL} is also an example of a microscopic model, in that it describes the path of alle vehicles exactly. In contrast, 
+a macroscopic model only describes averaged quantities, such as  traffic density. We will examine the relation between model \eqref{FtL} and a macroscopic model, a modified Lighthill-Whitham-Richards model.  
+\begin{equation} \label{intro:LWR}
+	\rho_t + \left(k(x)\rho v\left(\rho\right))_x = 0.
+\end{equation}
 
-pairs of the (FtL,This has been shown in several papers, for example. This papers examines a particular (FtL) model on the form, 
-The complete dynamics of each unit $x_n$ is governed an ordinary differential equation, depending on the bumper-to-bumper distance $s_n$ of the closest leading vehicle. Where $k(x)$ can be any suitably chosen smooth function.  [HelgePaper] shows that 
+Model \eqref{intro:LWR} is a scalar conservation law with a space dependent flux. For $k = 1$, it has been established that there exist a connection between model \eqref{intro:FtL} and \eqref{intro:LWR} in the so-called many particle limit. As the number of particles increase and the length of each car decreases in such a way that preserves the total mass, the system \eqref{intro:FtL} converge to a equation \eqref{intro:LWR}. See for example \cite{di2015rigorous},  \cite{holden2017continuum} and \cite{1556-1801_2018_3_409}. The result has previously been generalised. For example, by considering infinetely many vehicles in \eqref{intro:FtL}, as in  \cite{MARCELLINI2021124664}. This paper bases itself largely on the works by Holden et al, in \cite{556-1801_2018_3_409} and \cite{holden2017continuum} and generalises the proofs for the system to hold for a general $k$. The motivation behind the project is that it strengthens the connection between two modelling paradigms, which are mathematically different. One can consider a PDE as a generalisation of an ODE, but the existence and uniqeness theory of \eqref{intro:LWR} is delicate and require the concept of weak solutions, while the corresponding theory only require Lipschitz continuity and calculus. If such a relation can be established, then the FtL can be seen as a numerical approximation to the scalar conservation law. 
+%base on Helge, 
 
-ach These can be the bumper-to-bumper distance of proceding cars, the speed of the driver unit in the presence of a speed and so on. limit and varying other factors depending on the situation and complexity of the model. One model of intereset is the simple (X) model,
-For finitely many 
+
+\iffalse
 
 \textcite{argall2002rigorous}
 
@@ -47,7 +58,7 @@ On conservation laws in their most general form. - Dafermos.
 On the L1-contractitivty of scalar conservation law. 
 What came before. 
 
-Kruzkow entropy solution, weak solution. 
+Kruz\check{z}ov entropy solution, weak solution. 
 
 History of microscopic and macroscopic models: 
 - Two different approaches to traffic modelling are microscopic and macroscopic modelling. Microscopic models are density based and can be derived as continuum equations. Kinetic gass formulation.  These have been studied extensively in recent years. 
@@ -59,6 +70,7 @@ provided by the observation that all the systems of balance laws from Continuum
 Physics encountered in Chapter II are indeed accompanied by some inequality
 in the form (4.3.3) which expresses, explicitly or implicitly, the Second Law of
 thermodynamics. - Dafermos 
+\fi 
 
 \section{Some mathematical definitions}
 Here are some definitions that will be used throughout the thesis. 
@@ -73,14 +85,17 @@ and say that $f$ denotes the function between $X$ and $Y$. A set is a collection
 A class of function that is of interest are continuous functions. Continuity for functions between metric spaces, like $\R$, is most commonly first introduced in the $\epsilon - \delta$-fashion: 
 \begin{definition}[Continuity between metric spaces]
 A function  $f : X \rightarrow Y$ between metric spaces $X$, $Y$ is continuous at $x \in X$ if 
-given $\epsilon > 0 \,\, \exists \,\, \delta > 0 s.t. \forall y \in X$ where
+given $\epsilon > 0 \,\, \exists \,\, \delta > 0,$ such that $ \forall y \in X$ where
 \begin{equation}
     d(x,y) < \delta \implies d(f(x),f(y)) < \epsilon.
 \end{equation}
 \end{definition}
 }
 
-Geometrically, for each $\epsilon$ ball around an image point, there exists at least on $\delta-ball$ such that the image of the latter is contained in the former. A continuous function is continuous at every point $x \in X$. The set, or space of continuous functions betweeen $X$ and $Y$ is denoted by $\C(X,Y)$. Let $\Omega \subset \mathscr{R}^n$. One important class is
+Geometrically, for each $\epsilon$ ball around an image point, there exists a $\delta$-ball such that the image of the latter is contained in the former. A continuous function is continuous at every point $x \in X$. The set, or space of continuous functions betweeen $X$ and $Y$ is denoted by $\C(X,Y)$.
+
+\iffalse
+ Let $\Omega \subset \mathscr{R}^n$. One important class is
 
 \begin{equation} \label{C(Rn)}
      \mathscr{C}(\Omega) := \{f : \Omega \rightarrow \mathscr{R} \,|\, \text{f is a continuous function\}.
@@ -92,27 +107,25 @@ If $\Omega$ is compact, a result by SOMEONE, states that every element of $\C$ a
 \end{equation}
 By (...), is a banach space, or a complete normed space. 
 
-\begin{align*}
-    \mathscr{C}(\mathscr{R}^n) := \{f : \mathscr{R}^n \rightarrow \mathscr{R} \,|\, \text{f is continuous at every x $\in \mathscr{R}^n$}\}, \\
-    \mathscr{C}^{(k)}(\mathscr{R}^n) := \{f : \mathscr{R}^n \rightarrow \mathscr{R} \,|\, \textit{f is $k$-times continuously differentiable}\} \subset \mathscr{C}(\mathscr{R}^n) \, \forall k \in \mathscr{N}, \\
-    \mathscr{C}^{\infty}(\mathscr{R}^n) := \{f : \mathscr{R}^n \rightarrow \mathscr{R} \,|\, \frac{\partial^{\alpha} f}{\partial^{\alpha} x}\in \mathscr{C}(\mathscr{R}^n) \, \forall \, \alpha \in \mathscr{Z}^n\} = \bigcap_{i=0}^{\infty} \mathscr{C}^{(k)}(\mathscr{R}^n).
-\end{align*}
+
 There are several equivalent definitions and generalisations of continuity, the standard one being a local definition. 
 USE DEFINITIONS 
 
 Total variation is a measure of how much a function changes. For a function that takes pointwise values, we have the following definition
 
+\fi 
+
 \subsection{Functions of bounded variation and Lipschitz continuous functions}
-Some results and definition concerning functions of bounded variation and Lipschitz continuous functions. Functions of bounded variation permeate the theory of hyperbolic conservation laws, and is often a vital assumption to make for the solutions to obtain existence and uniqueness theory. As we will see in the main part of the thesis, they serve a vital role. 
+Some results and definition concerning functions of bounded variation and Lipschitz continuous functions. Functions of bounded variation permeate the theory of hyperbolic conservation laws, and is often a vital assumption to make for the solutions to obtain existence and uniqueness theory. See for example \cite{holden2015front}. As we will see in the main part of the thesis, they serve a vital role. 
 
-Lipschitz continuous funtions are an important subclass of functions of bounded variation. In many cases, as good as differentiable. Many important results in differentiable calculus extend to Lipschitz continuous functions. 
+Lipschitz continuous funtions are an important subclass of functions of bounded variation. In many cases, as good as differentiable. Many important results in differentiable calculus extend to Lipschitz continuous functions. The following definitions are taken from \cite{tao2011introduction}. 
 
-\begin{definition}(Bounded variation in one dimension)
+\begin{definition}(Bounded variation in one dimension) \label{def:bounded_variation}
 Let $f : \R \rightarrow \R$ be a function. The \emph{total variation} T.V.($f$) of $f$ is defined to be the supremum
 \begin{equation} \label{TV_1d}
 	\text{T.V.}(f) = \sup_{x_0 < ... < x_n} \sum_{i = 0}^{n-1} \left| f(x_{i+1}) - f(x_i)\right|
 \end{equation} 
-where the supremm ranges over all finite increasing sequences $x_0, ..., x_n$ of real numbers with $n \geq 0$; this is a quantity in $[0, \infty]$. We say that $f$ has \emph{bounded variation} on $\R$ if T.V.($f$) is finite. If T.V.($f$) is finite when $x_0, ..., x_n$ are restricted to a compact set $K$, we say that $f$ is of \emph{locally bounded variation}. Other ways to write T.V.($f$) include $\left|f\right|_{\text{BV}}$ to emphasise the semi-norm property. %Book that proves that BV norm is a banach space
+where the supremm ranges over all finite increasing sequences $x_0, ..., x_n$ of real numbers with $n \geq 0$; this is a quantity in $[0, \infty]$. We say that $f$ has \emph{bounded variation} on $\R$ if T.V.($f$) is finite. If T.V.($f$) is finite when $x_0, ..., x_n$ are restricted to a compact set $K$, we say that $f$ is of \emph{locally bounded variation}. Other ways to write T.V.($f$) include $\left|f\right|_{\text{BV}}$, to emphasise the semi-norm property. %Book that proves that BV norm is a banach space
 %BV functions are bounded 
 %
 
@@ -157,7 +170,7 @@ The notion of T.V.$(\cdot)$ can be extended to functions $f:\R^n \mapsto \R$ for
 \begin{remark}
 	From here, T.V.($f$) can be extended to $\R^2$ by
 	\begin{equation} \label{TV_2d}
-		\text{T.V.}(f) = \int_\R \text{T.V.}_{x_1}(f) + \text{T.V.}_{x_2}(f) \diff x
+		\text{T.V.}(f) = \int_\R \text{T.V.}_{x_1}(f) + \text{T.V.}_{x_2}(f) dx
 	\end{equation}
 	   If $f$ is differentiable, \eqref{TV_2d} is proportional to $\norm{\nabla g}_{L_1}$. In this thesis, \eqref{TV_slice} will mainly be used. 
 \end{remark}
@@ -168,7 +181,7 @@ The notion of T.V.$(\cdot)$ can be extended to functions $f:\R^n \mapsto \R$ for
 	\begin{equation}
 		\text{T.V.}(f) = \sup_{x_0 < ... < x_n} \sum_{i = 0}^{n-1} \left| f(x_{i+1}) - f(x_i)\right|
 	\end{equation} 
-	where the supremm ranges over all finite increasing sequences $x_0, ..., x_n$ of real number with $n \geq 0$; this is a quantity in $[0, \infty]$. We say that $f$ has \emph{bounded variation} on $\R$ if T.V.($f$) is finite. Other ways to write T.V.($f$) include $\left|f\right|_{\text{BV}}$ to emphasise the semi-norm property.
+	where the supremum ranges over all finite increasing sequences $x_0, ..., x_n$ of real number with $n \geq 0$; this is a quantity in $[0, \infty]$. We say that $f$ has \emph{bounded variation} on $\R$ if T.V.($f$) is finite. Other ways to write T.V.($f$) include $\left|f\right|_{\text{BV}}$ to emphasise the semi-norm property.
 
 In this thesis, we will denote 
 
@@ -194,18 +207,18 @@ To see that Lipschitz continuous functions are of locally bounded variation, obs
 \end{equation}
 So if $K$ is bounded, then T.V.($f$) $< \infty$. In particular, if $f$ is defined on a compact set, then it is of bounded variation. 
 
-\begin{proposition}(Lipschitz differentiation theorem) \label{prop:Lip_diff_prop}
+\begin{theorem}(Lipschitz differentiation theorem) \label{prop:Lip_diff_prop}
 	A Lipschitz continuous function is differentiable almost everywhere, in the sense of Lebesgue measure. Where the derivative exists, it is bounded by the Lipschitz constant $L$. 
-\end{proposition}
-\begin{proof}
-	For a statement of the theorem, see \cite[p.167]{tao2011introduction}. This follows from the fact that Lipschitz functions are locally of bounded variation. 
-\end{proof}
+\end{theorem}
+\begin{remark}
+	For a statement of the theorem, see \cite[p.167]{tao2011introduction}. The result follows from the fact that Lipschitz functions are locally of bounded variation. 
+\end{remark}
 
-\eqref{prop:Lip_diff_prop} states that Lipschitz functions are almost differentiable. 
+Theorem \eqref{prop:Lip_diff_prop} states that Lipschitz functions are almost differentiable. 
 
 Two properties of Lipschitz continuous functions that will be useful are 
 \begin{proposition}(Lipschitz properties) \label{prop: Lipschitz_props}
-	Let f,g : $\R \mapsto \R$ be Lipschitz continous. Then the composition
+	Let f,g : $\R \mapsto \R$ be Lipschitz continuous. Then the composition
 	\begin{equation}
 		f \circ g : \R \mapsto \R
 	\end{equation}
@@ -222,33 +235,60 @@ Two properties of Lipschitz continuous functions that will be useful are
 	holds almost everywhere.
 \end{proposition}
 
-Even for continuous B.V. functions, it is not true that the difference in function values can found by integrating the almost everywhere derivative. If the variation of the function is concentrated on a set of lebegue measure zero, the second fundamental theorem of calculus will fail to hold \cite[see The Devil's staircase function][p. 186]{tao2011introduction}}. The following theorem shows that this does not occur for Lipschitz continuous functions. 
+Another useful property relating B.V. functions and functions of bounded variation is the following result
 
-\begin{theorem}(Second fundamental theorem of calculus for Lipschitz functions)
+ \begin{proposition}(\text{B.V.} properties) \label{prop:BV_props}
+ 	Let f, g: $\R \mapsto \R$ be functions of bounded variation. Then the product 
+ 	\begin{equation} \label{prop:BV_prop_prod}
+ 		f g :\R \mapsto \R
+ 	\end{equation}
+ 	is also of bounded variation. 
+ 	
+ 	Assume in addition that $f$ is Lipschitz, then 
+ 	\begin{equation} \label{prop:BV_prop_comp}
+ 		f \circ g :\R \mapsto \R
+ 	\end{equation}
+ 	is of bounded variation. 
+ \end{proposition}
+
+
+
+Even for continuous B.V. functions, it is not true that the difference in function values can found by integrating the almost everywhere derivative. If the variation of the function is concentrated on a set of lebegue measure zero, the second fundamental theorem of calculus can fail to hold \cite[see The Devil's staircase function][p. 186]{tao2011introduction}}. The following theorem shows that this does not occur for Lipschitz continuous functions. 
+
+\begin{theorem}(Second fundamental theorem of calculus for Lipschitz functions) \label{thm:fundamental_calc_Lipschitz}
 	
-	Let f : $\R \mapsto \R$ be Lipschitz continuous and $a,b \in \R$. Then, 
+	Let f : $\R \mapsto \R$ be Lipschitz continuous and $a,b \in \R$ and f$^{'}$ : $\R \mapsto \R$ be the almost everywhere derivative. Then, 
 	\begin{equation}
-		\int_a^b f(x) dx = f(b) - f(a).
+		\int_a^b f'(x) dx = f(b) - f(a).
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	Exercise 1.6.44 in \citep[p.169]{tao2011introduction}
+	Exercise 1.6.44 in \cite[p.169]{tao2011introduction}
 \end{proof}
+
+We state the other half of the fundamental theorem of calculus, under slightly stronger assumptions on the derivative. 
+
+\begin{theorem}(First fundamental theorem of calculus) \label{thm:first_fundamental_calc}
+	
+	Let $[a,b]$ be a compact interval of positive length. Let f :$[a,b] \mapsto \R$ be a continuous function, and let F: $[a,b] \mapsto \R$ be the indefinite integral $F(x):= \int_a^x f(t) d$. Then F is differentiable on $[a,b]$, with derivtative $F^{'}(x) = f(x)$ for all $x \in [a,b]$. In particular, $F$ is continuously differentiable. 
+\end{theorem}
+
+A proof of a slightly more general version of \eqref{thm:first_fundamental_calc} can be found in \cite[p.135]{tao2011introduction}, where the functions $f,F$ are allowed to take complex values. 
 
 \subsection{Compactness for partial differential equations}
 
-Central in the theory of non-linaer partial differential equations is the quest for compactness. One can often formulate an approximating sequence of functions with the property such that the partial differential equation is satisfied in the limit. For the porous medium equation, this can be done by using the semi-discretisation and a forward difference scheme in the spatial variables, as can be seen in. To solve scalar conservation laws and system of conservation laws, this strategy is also proposed. Compactness results are needed to establish that the approximating sequence itself converges to some candidate solution, which then must be verified to satisify the original equation. The compactness trick is in many ways the substance of the argument. Therefore, I will introduce three notions of compactness that will be used in this thesis implicitly and explicitly. The relevant setting is that of metric spaces. 
+Central in the theory of non-linear partial differential equations is the quest for compactness. One can often formulate an approximating sequence of functions with the property such that the partial differential equation is satisfied in the limit. The method of front-tracking is one such example, see \cite{holden2015front}. Compactness results are needed to establish that the approximating sequence converges to some candidate solution, which then must be verified to satisify the original equation. The compactness trick is in many ways the substance ofthe argument. Therefore, I will introduce three notions of compactness that will be used in this thesis implicitly and explicitly. The relevant setting is that of metric spaces. 
 
-\begin{definition}(Metric space)
+\begin{definition}(Metric space)\eqref{def:metric_space}
 	A \emph{metric space} is a pairing of a set $X$ and a function $d$,  
 	\begin{align}
 		d : X \times X \mapsto \R^+_0, 
 	\end{align}
 	$d$ satisifies the metric axioms. For $x,y,z \in X$, 
 	\begin{align}
-		d(x,y) &= 0 \iff x = y \,\, &&\text{identity of indiscernibles} \\
-		d(x,y) &= d(y,x) \ \,\, &&\text{symmetry of distances} \\
-		d(x,y) &= d(x,z) + d(z,y)  \,\, &&\text{subadditivity}
+		d(x,y) &= 0 \iff x = y \,\, &&\text{identity of indiscernibles} \label{def:metric_identity}\\
+		d(x,y) &= d(y,x) \ \,\, &&\text{symmetry of distances}\label{def:metric_symmetry} \\
+		d(x,y) &= d(x,z) + d(z,y)  \,\, &&\text{subadditivity}\label{def:metric_subadditivity}
 	\end{align}
 	An open ball $B_x(r) \subset X$ centered at $x \in C$ with radius $r > 0$ is
 	the set of points with distance less than $r$ from $x$ according to the metric $d$. 
@@ -256,16 +296,25 @@ Central in the theory of non-linaer partial differential equations is the quest 
 
 A definition of topology is also included 
 
-\begin{definition}(Topology and the metric topology)
+\begin{definition}(The metric topology)
 	
-	Let $X$ be a set. A \emph{topology} $\tau \subset 2^X$ is any collection of subsets of $X$ that is closed under arbitary union and finite intersection. $\tau$ must also include $\varnothing$ and the space $X$ itself. 
-	
-	From any collection of subsets $C$ of $X$, one can generate a topology. This is done by adding $\varnothing$ and $X$ to $C$, if necessary, and expanding the collection over arbitrary unions and finite intersection. 
-	
-	Let $(X,d)$ be a metric space. The \emph{metric topology} $\tau_d \subset 2^X$ is the topology generated by open balls $B_x(r)$ for $x \in X$ and $r > 0$. 
+	Let $(X,d)$ be a metric space. A subset U is open in X if for every $x \in U$, there exist $\epsilon > 0$ and an open ball $B_x(\epsilon)$ such that  $B_x(\epsilon) \subset U$. 
 \end{definition}
 
-Examples of metric spaces include $\R^d$ endowed with the euclidean metric and $L^1(\R)$. 
+Examples of metric spaces include $\R^d$ endowed with the euclidean metric and $L^1(\R)$ endowed with the $L^1(\R)$. 
+
+A useful fact about the open sets in $\left(\R,\left|\cdot\right|\right)$, is 
+
+\begin{proposition}(Characterisation of open sets in $\R$) \label{prop:char_opens_R}
+	
+	Any open subset U of $\R$ can be written
+	as the union of at most countably many disjoint non-empty open intervals, whose endpoints lie outside of U. 
+\end{proposition}
+
+\begin{remark}
+	Given as exercise 1.6.10 in \cite{tao2011introduction}. 
+\end{remark}
+
 
 \begin{definition} (Completeness in metric spaces)
 	A metric space $(X,d)$ is complete if every cauchy sequence has a limit in $X$. 
@@ -278,27 +327,21 @@ Sequential compactness for metric spaces is defined as follows
 \begin{definition}(Sequential compactness for metric spaces)
 	
 	Let $(X,d)$ be a metric space and $K \subset X$ be a subset. $K$ is \emph{sequentially compact} if for any sequence $\{x_n\}_{n \in \N} \subset K$, there exist a subsequence $\{x_{n_i}\}_{i \in \N}$ converging to some $\hat{x} \in K$. 
-	If every sequence of $K$ has a convergent subsequence, but we cannot guarantee that the limit lies in $K$, then $K$ is \emph{sequentially precompact}.
+	If every sequence of $K$ has a convergent subsequence, but we cannot guarantee that the limit lies in $K$, then $K$ is \emph{sequentially pre-compact}.
 \end{{definition}
 
 A topological definition of compactness uses the the open cover concepts. 
 
+
 \begin{definition} (Open covers and topological compactness)
-	
-	Let $(X,\tau)$ be a topological space. Let $K\subset X$ be a subset. An open cover of $K$ is a (possibly uncountable) collection of open sets $C \subset \tau$ such that 
-	\begin{equation}
-		K \subset \cup_{O \in C} O.
-	\end{equation}
-	A refinement of the open cover $C$ is an open cover $\tilde{C}$ of $K$ such that 
-	\begin{equation}
-		K \subset \cup_{O \in \tilde{C}} O  \text{ and } \tilde{O} \in \tilde{C} \implies \exists O \in C \text{ such that } \tilde{O} \subset O. 
-	\end{equation}
-	A subset $K$ is said to be \emph{topologically compact}, or simply \emph{compact} if an arbitrary open cover admits a finite refinement. That is, a refinement consisting of a finite number of open set. 
+	Let (X,d) be a metric space. X is said to be \emph{topologically compact}, or simply \emph{compact} if any open cover admits a finite subcover. 
 \end{definition}
 
+
+
 \begin{remark}
- 	If $X = \R$ is endowed with the euclidean metric, a subset $K$ is compact if and only if it is closed and bounded. Pre-compactness is thus equivalent with boundedness. %CITE
- 	The notions introduced in this section can thus be seen as generalisations of the boundeness concept in one dimension. Other generalisations are aplenty, as can be seen in %CITE. 
+ 	If $X = \R$ is endowed with the euclidean metric, a subset $K$ is compact if and only if it is closed and bounded, by the Heine-Borel theorem \cite{kumaresan2005topology}. Pre-compactness is thus equivalent with boundedness. %CITE
+ 	The notions introduced in this section can thus be seen as generalisations of closed and boundened sets in one dimension.  
 \end{remark}
 
 The following theorem concept important for characterising compact metric spaces
@@ -313,18 +356,71 @@ The following theorem concept important for characterising compact metric spaces
 	$B_{c}(\epsilon)$ is the open ball of radius $\epsilon$, centered at $c$. Such a covering is dubbed an $\epsilon$-net.
 \end{definition}
 
-This concept resembles the definition of topological compactness, in that it stipulates the existence of finite open covers, the $\epsilon$-nets. The three concepts of this section are in fact identical for complete metric spaces.
+This concept resembles the definition of topological compactness, in that it stipulates the existence of  finite open covers, the $\epsilon$-nets. The three concepts of this section are in fact identical for complete metric spaces.
 
-\begin{theorem} (Equivalence theorem)
+\begin{theorem} (Characterisation of compact sets for metric spaces) \label{thm:metric_space_equivalence}
+	For a metric space (X,d), the following are equivalent: 
 	
-	1) A metric space is topologically compact, or compact, if and only if it is totally bounded and complete. 
+	1) X is compact: every open cover has a finite subcover. 
 	
+	2) X is complete and totally bounded. 
 	
-	2) A metric space is compact if and only if it is sequentially compact. 
+	3) X is sequentially compact: every sequence has a convergent subsequence.	
 	
 \end{theorem}
 
-The Kolmogorov-Riesz-Sudakov theorem uses the concept of total boundedness to establish conditions for strong $L^p$-compactness. The concept of sequential compactness is useful to apply the theory, when compactness has already been established. For this thesis, we will use sequential compactness directly and the other concepts implicitly, e.g. by invoking of Arzela-Ascoli and the strong compactness criteria of Kolmogorov-Riesz-Sudakov. 
+The definitions and the theorem above are taken from \cite{kumaresan2005topology}. 
+
+The main compactness result we will use is Strong-Compactness criterium of Kolmogorov-Riesz-Sudakov, found in \citet{HANCHEOLSEN201984}.  
+
+\begin{theorem}(Kolmogorov-Riesz-Sudakov) \label{thm:Kolmogorov}
+	The set $\mathcal{F} \subset L^p(\R^d, m^d)$ for $1 \leq p < \infty$ is totally bounded if and only if
+	\begin{align}
+		i) &\,\text{Localisation: for any $\epsilon > 0$, $\exists \,\, R > 0$ such that} \\
+		& \quad \quad \forall f \in \mathcal{F} \,\, \int_{\left|x\right| \geq R} \left| f\right|^p dx \leq \epsilon^p \\
+		ii) &\,\text{Translation: For any $\epsilon > 0$, $\exists\,\, \rho > 0$ such that for $y \in \R^d, \left|y\right| \leq \rho$}\\
+			&\quad \quad \forall f \in \mathcal{F} \,\, \int \left| f(x+y) - f(x)\right|^p dx \leq \epsilon^p
+	\end{align}
+\end{theorem}
+
+The next theorem is the Arzela-Ascoli theorem. First, the setting is introduced
+\begin{definition}(Arzela-Ascoli setting) \label{Arzela_setting}
+	Let $\mathcal{F} \subset \mathscr{C}(X,Y)$, where $X$ is a separable topological space and $Y$ is a complete metric space. 
+	
+	$\mathcal{F}$ is called equicontinuous at $x \in X$ if given $\epsilon > 0$ there exists a neighbourhood $A \subset X$ so that $\forall f \in \mathcal{F}$ and $y \in A$: 
+	\begin{equation}
+		d(f(x), f(y)) \leq \epsilon.
+	\end{equation}
+	$\mathcal{F}$ is equicontinuous if it is equicontinuous at every point $x \in X$. 
+	
+	
+	$\mathcal{F}$ is called pointwise totally bounded if the trajectory of $\mathcal{F}$ at $x \in X$ is pointwise totally bounded. The trajectory is defined by 
+	\begin{equation} \label{Arz_set:traj}
+		\mathcal{F}(x) = \{f(x)  \, | \, f \in \mathcal{F}\}. 
+	\end{equation}
+\end{definition}
+Then, the theorem is stated
+
+\begin{theorem} (Arzela-Ascoli theorem)
+	If $\mathcal{F}$ is equicontinuous pointwise totally bounded, then any sequence in $\mathcal{F}$ has a pointwise convergent subsequence with a limit in $\C(X,Y)$. The convergence is uniform on topologically compact subsets of $X$. 
+\end{theorem}
+
+\begin{theorem} (Arzelà-Ascoli theorem for Banach space valued functions) \label{thm:Arzela_banach}
+	
+	Let $(K,d)$ be a compact metric space, let $(Y, \norm{\cdot})$ be a Banach space, and let the space $\mathscr{C}(X,Y)$ be equipped with the sup-norm 
+	\begin{equation}
+		\norm{f}_{{C}(X,Y)} = \sup_{x \in X} \norm{f(x)}_{Y},
+	\end{equation}
+	for $f \in \mathscr{C}(X,Y)$. Then, the closure $\mathcal{F}$ of a subset $\mathcal{F} \subset \mathscr{C}(X,Y)$ is compact if and only if the following two properties are satisfied:
+	
+	\indent a) For each $x \in X$, the closure of the set $\{f(x); x \in X\}$ is a compact subset of $Y$.
+	\indent b) Given any $\epsilon > 0$, there exists $\delta(\epsilon) > 0$  such that $\norm{f(x) - f(y)} < \epsilon$ for all $x,y \in K$ such that $d(x,y) < \delta(\epsilon)$ and for all $f \in \mathcal{F}$.
+\end{theorem}
+
+Theorem \ref{thm:Arzela_banach} was given as an exercise in \cite{p. 166, problem 3.10-1, } 
+
+
+The Kolmogorov-Riesz-Sudakov theorem uses the concept of total boundedness to establish conditions for strong $L^p$-compactness. The concept of sequential compactness is useful to apply the theory, when compactness has already been established. In this thesis, we will use sequential compactness directly and the other concepts implicitly, e.g. by invoking of Arzela-Ascoli and the strong compactness criteria of Kolmogorov-Riesz-Sudakov. 
 
 
 
@@ -332,8 +428,9 @@ The Kolmogorov-Riesz-Sudakov theorem uses the concept of total boundedness to es
 
 \subsection{Some theory of $L^p$ spaces}
 
+
 We define, as in ~\autocite{brezis2010functional}
-\begin{definition} (Measure space)
+\begin{definition} (Measure space) \label{def:measure_space}
 	
 	A measure space is a triple $(\Omega, \mathcal{M}, \mu)$. 
 	\begin{align}
@@ -350,35 +447,249 @@ We define, as in ~\autocite{brezis2010functional}
 		&\text{such that $\Omega = \cup_{i = 1}^\infty \Omega_n$ and $\mu\left(\Omega_n\right) < \infty$.} 
 	\end{align}                                                                 
 \end{definition}
-From integration theory, we know that a function need not be defined everywhere to be differentiable. ~\autocite[compare][80]{landes1951scrutiny} \citetext{landes1951scrutiny}
- \nocite{*} 
- 
 
-Measure theory introduces a generalisation of the function definition, and considers equivalence classes of functions. 
+The measure space that will be used in this text is the lebesgue triple $(\Omega, \mathcal{L}^d, m^d)$.  $\Omega$ will be an open subset of $\R^d$ where $d \in \N^+$, and $\mathcal{L}^d, m^d$ are the $d$-dimensional lebesgue $\sigma$-algebra and lebesgue measure restricted to $\Omega$, respectively. 
+
+As in \cite[Definition 1.2.2][p. 20]{tao2011introduction}, we define
+\begin{definition} (Lebesgue outer measure)
+	For any set $E \subset \R^d$, define the $d$-dimensional lebesgue outer measure of $E$
+	\begin{equation}
+		m^d_{outer} := \inf_{\cup_{i = 1}^\infty B_n \superset E; B_1,B_2,..., \text{boxes}} \sum_{i = 1}^{\infty} \left| B_i \right|.
+	\end{equation}
+	A box is a cartesian product of $d$ intervals. $\left|\cdot \left|$ denotes the volume of a box, being the product of the length of its sides. 
+\end{definition}
+
+\begin{definition} (Lebesgue measurability and lebesgue measure)
+	A set $E \subset \R^d$ is said to be \emph{Lebesgue measurable} if, for every $\epsilon > 0$, there exists an open set $U \subset \R^d$ containing $E$ such that \[m^d_{outer}(U\backslash E) \leq \epsilon.\] If $E$ is Lebesgue measurable, we refer to \[m^d(E) := m^d_{outer}\] as the lebesgue measure of $E$. The quantity may possibly be infinite. 
+	
+	The measure space $\left(\R^d, \mathcal{L}^d, m^d\right)$ is called the Lebesgue-triple. 
+\end{definition}
+
+\begin{remark}
+	Up to normalisation, lebesgue measure is the only measure over the lebesgue measurable sets, in the sense of \eqref{def:measure_space} which is also translation invariant. 
+\end{remark}
+
+Measure theory introduces a generalisation of the function definition using  following equivalence class. 
 
 \begin{definition}(The almost everywhere equivalence class)
-	Let $f,g : \Omega \mapsto \R$ be two functions defined on a measure space $(\Omega, \Sigma, \mu)$.  Let $N = \{x \in \Omega \, | \, f(x) \neq g(x)) \}$. $f,g$ are equal almost everywhere if 
-	\begin{equation}
-		\mu(N) = 0.
-	\end{equation}
+	Let $f,g : \Omega \mapsto \R$ be two functions defined on a measure space $(\Omega, \Sigma, \mu)$.  Let $N = \{x \in \Omega \, | \, f(x) \neq g(x)) \}$. $f,g$ are equal \emph{almost everywhere}, or a.e. if they differ on a \emph{null set}, i.e., a set of measure zero. 
 	We write 
 	\begin{equation}
 		[f] = [g]. 
 	\end{equation}
+	A representative of an equivalence class is called a \emph{version}. 
 \end{definition}
 
-Furthermore, we define a measurable function
+The proceeding definitions and theorems require the formal notion of an integral and measurable functions. These are not of direct interest for this thesis, and we refer to \cite{tao2011introduction} for the construction and property of these objects.
 
-\begin{definition}(Measurable function)
-	Let $(\Omega, \Sigma, \mu)$ be a measure space. 
+	
+An important space of functions in the context of integration theory are the $L^p$ spaces of integrable functions. First, recall the definition of a normed vector space
+
+\begin{definition}(Normed vector space)
+	A normed real vector space is a pairing $(X, \norm{\cdot })$ of a vector space $X$ over $\R$ endowed with a non-negative function $\norm{\cdot}$ 
+	\begin{equation}
+		\norm{\cdot} : X \mapsto \R_0^+,  
+	\end{equation}
+	$\norm{\cdot}$ satisfies the norm axioms. For $x,y,z \in X$, $s \in \R$, 
+	\begin{align}
+		\norm{x+y} &\leq \norm{x} + \norm{y} \,\, &&\text{subadditivity} \\
+		\norm{s x} &= \left| s \right| \norm{x} \ \,\, &&\text{absolute homogeneity} \\
+		\norm{x} &= 0 \implies x = 0  \,\, &&\text{Positive definiteness}
+	\end{align}
 \end{definition}
+
+\begin{remark}
+	Any norm on $X$ induces a metric on $X$, defined by $d_{\norm{\cdot}}(x,y) = \norm{x - y}$. 
+\end{remark}
+
+\begin{definition}(Banach space)
+	A Banach space is a complete normed vector space. The metric space induced by the normed space is complete. 
+\end{definition}
+
+We can now sensibly define the $L^p$ spaces associated with a measure space. 
+\begin{definition}($L^p$-spaces) \label{def:Lp_space}
+	
+	Let $\left(\Omega, \mathcal{M}, \mu\right)$ be a measure space. We set 
+	\begin{equation}
+		L^p(\Omega, \mu) = \{ f : \Omega \mapsto \R | f \text{ is measurable and } \norm{f}_{L^p} < \infty \},
+	\end{equation}
+	where we define the norm-in-name 
+	\begin{numcases} {\norm{f}_{L^p}}
+		 \left(\int_X \left|f(x)\right|^p d\mu\right)^{\frac{1}{p}} &\text{ for } p\in [1,\infty) \label{Lp-norm1} \\
+		 \text{essup}_{x \in X} \left|f(x)\right|&\text{ if } p = \infty \label{Lp-norm2}
+	\end{numcases}
+	If the measure space is implied, we write $L^p$. The special case of $p = 1$ is called the space of \emph{integrable functions}. 
+\end{definition}
+
+A fundamental property of $L^p$ are given in the following two theorems, namely that $L^p$ is a Banach space.  
+
+\begin{theorem}
+	$L^p$ is a vector space over $\R$ and $\norm{\cdot}_{L^p}$ is a norm for any $p, 1 \leq p \leq \infty$. 
+\end{theorem}
+
+\begin{remark}
+	The theorem states that the norm-in-name of \eqref{def:Lp_space} is in fact a norm.
+\end{remark}
+
+\begin{theorem}(Fischer-Riesz)
+	$L^p$ is a Banach space for any $p, 1 \leq p \leq \infty$.
+\end{theorem}
+There are several ways to compute $L^p$-norms. In general, norms of Banach spaces can be computed using the dual space. The Hahn-Banach theorem ensures the existence of a normalising dual vector \footnote{see Corollary 1.3 and 1.4 in \citet[p.3]{brezis2010functional}}. If $E$ is a banach space and $E^*$ is its dual space, then for $x \in E$ 
+\begin{equation} \label{norm_dual_formulation}
+	\norm{x} = \max_{f \in E^*, \norm{f} \leq 1} \left|\langle f, x \rangle\right|
+\end{equation}
+The problem of computing the norm can be formulated as an infinite dimensional linear program, which has a solution due to Hahn-Banach. More specifically for $L^p$-spaces, it can be shown that for $1 < p, q < \infty$, if $\frac{1}{p} + \frac{1}{q} = 1$, then $(L^p)^* = L^q$ and $(L^q)^* = L^p$ under the pairing
+% in the setting where the domain is separable
+\begin{equation} \label{LpLq_dual_pairing}
+	\langle f, g \rangle\right| = \int_\Omega f g d\mu \quad \quad \text{ for } f \in L^p,g\in L^q
+\end{equation}
+Any dual vector has a concrete representation as a function residing in some other function space. For the special cases of $L^1$, $L^\infty$, we have that $(L^1)^* = L^\infty$ under \eqref{LpLq_dual_pairing} but $(L^\infty)^* \neq L^1$. A result in the same vein as \eqref{norm_dual_formulation} as given below
+
+
+\begin{proposition}(Computing $L^1$-norms using test functions)
+	Consider the Lebesgue triple. Let $f \in L^1(\R, m)$, then we have 
+	\begin{equation}
+		\norm{f}_{L^1} = \sup_{\phi \in \C^\infty_c(\R), \left|\phi\right| \leq 1} \int_\R f(z)\phi(z) dm(z)
+	\end{equation}
+\end{proposition}
+The result is taken from Exercise A.1 in \cite{holden2015front}. 
+
+%Skriv kortere og mer relevant til oppgaven. 
+
+A couple of essential theorems of integration theory that will be used throughout this text are the dominated convergence theorem and Fubini's theorem. The first of which is an essential convergence result. 
+
+\begin{theorem}(Lebesgue dominated convergence theorem) \label{DCT}
+	Let $(\Omega, \mathcal{M}, \mu)$ be a measure space and let $\{f_n\}_{n \in \N}$ be a sequence of measurable functions that converge pointwise $\mu$-almost everywhere to a meaasurable limit $f : \Omega \mapsto \R$. Suppose that there is an unsigned absolutely interable function $G : \Omega \mapsto [0,\infty]$ such that $\left|f_n\right|$ are pointwise $\mu$-almost everywhere bounded by $G$ for each $n$. Then we have 
+	\begin{equation}
+		\lim_{n \rightarrow \infty} \int_\Omega f_n d\mu = \int_\Omega f d\mu
+	\end{equation}
+\end{theorem}
+
+Theorem \eqref{DCT} is theorem 1.4.49, p. 111 in \cite{tao2011introduction}. 
+Some special cases of theorem \eqref{DCT} is included,
+\begin{corollary}(Finite measure space) \label{cor:DCT:finite}}
+	For finite measure spaces, (meaning $\mu(\Omega) < \infty$), $L^\infty(\Omega, \mu) \subset L^1(\Omega, \mu)$. So if $\sup_{n \in \N} \norm{f_n}_\infty \leq C <\infty$, we can choose the constant $C$ as the dominating function $G$.
+\end{corollary}
+
+\begin{corollary}(Monotone convergence theorem) \label{cor:MCT}
+	Let $(\Omega, \mathcal{M}, \mu)$ be a measure space and let  $0 \leq f_1 \leq f_2 \leq ...$ be a non-decreasing sequence of unsigned measurable functions on $\Omega$. Then we have 
+	\begin{equation}
+		\lim_{n \rightarrow \infty} \int_\Omega f_n d\mu = \int_\Omega \lim_{n \rightarrow \infty} f_n d\mu
+	\end{equation}
+	p. 107, theorem 1.4.44. Tao. 
+\end{corollary}
+	
+
+
+
+
+Fubini's theorem allows us to exhange the order of integration and compute a $d$-fold integral by $d$ iterations of one dimensional integrals. 
+
+\begin{theorem}(Fubini)
+	Assume that $f \in L^1(\Omega_1 \times \Omega_2)$. Then for a.e. $x \in \Omega_1, F(x,y) \in L^1_y(\Omega_2)$ and $\int_{\Omega_2} F(x,y)d\mu_2 \in L^1_x\left(\Omega_1\right)$. Similarly, for a.e. $y \in \Omega_1, F(x,y) \in L^1_x(\Omega_1)$ and $\int_{\Omega_1} F(x,y)d\mu_1 \in L^1_y\left(\Omega_2\right)$. Moreover, one has 
+	\begin{equation}
+		\int_{\Omega_1} d\mu_1 \int_{\Omega_2} F(x,y)d\mu_2 = \int_{\Omega_2} d\mu_2 \int_{\Omega_1} F(x,y)d\mu_1 = \int_{\Omega_1 \times \Omega_2} F(x,y)d\mu_1\times d\mu_2
+	\end{equation}
+\end{theorem}
+A proof can be found in \eqref{Tao}. 
+
+
+Another useful theorem concerns two modes of convergence of $L^p$-functions.
+
+\begin{theorem}(Connection between normed and pointwise a.e. convergence) \label{thm:lp_implies_a.e.}
+	Let $\{f_n\}_{n \in \N}$ be a sequence in $L^p$ and let $f \in L^p$ be such that $\norm{f_n - f}_{L^p} \rightarrow 0$. 
+	Then there exists a subsequence $\{f_{n_k}\}_{k \in \N}$ and $h \in L^p$ such that
+	\begin{align}
+		i) & \, f_{n_k}(x) \rightarrow f(x) \text{ a.e. on }\Omega \\
+		ii) & \, \left| f_{n_k}(x)\right| \leq h(x) \,\, \forall k\in \N, \text{ a.e. on } \Omega
+	\end{align}
+\end{theorem}
+
+Egorov's theorem concerns the equivalence between pointwise almost everywhere convergence and almost uniform convergence, for finite measure spaces. It is one of Littlewood's three principles. 
+
+\begin{theorem}(Egorov's theorem) \label{thm:egorov}
+	Let $(\Omega, \mathbb{M}, \mu)$ be a finite measure space. That is 
+	\begin{equation}
+		\mu(\Omega) < \infty,
+	\end{equation}
+	and let $f_n : \Omega \mapsto \R$ be a sequence of measurable functions that converge pointwise almost everywhere to a limit $f: \Omega \mapsto \R$, and let $\epsilon > 0$. There exist a set $E$ of measure at most $\epsilon$, such that $f_n$ converge uniformly to $f$ outside of $E$. 
+\end{theorem} 
+The complex version of \eqref{thm:egorov} was given as an exercise in TAO. 
+
+
+ If we have norm convergence of a sequence of functions in $L^p$, we can always extract a subsequence that convergences pointwise almost everywhere. Proofs of all the above theorems can be found in \textcite{brezis2010functional}. The following lemma is taken from \textcite[p.410]{holden2015front} and considers the the lebesgue triple in particular. 
+ 
+
+The following lemma was taken from p.420 \cite{holden2015front}
+ 
+ \begin{lemma}(Pointwise convergence of sign) \label{lem:sign_lemma}
+ 	Let $\Omega \subset \R^d$ be an bounded open set, let $g \in L^1(\Omega, m^d)$ and suppose that $g_n(x) \rightarrow g(x)$ almost everywhere. Then there exists a set $\Theta \subset \R^d$, which is at most countable, such that for every $c \in \R \backslash \Theta$, 
+ 	\begin{equation}
+ 		\textnormal{sign}\left( g_n(x) - c\right) \rightarrow \textnormal{sign}\left( g(x) - c\right) \text{a.e. in } \Omega.
+ 	\end{equation}
+ 	Furthermore, let $c \in \Theta$ and define
+ 	\begin{equation}
+ 		\mathcal{F} = \{x \in \Omega | g(x) = c\}
+ 	\end{equation}
+ 	then it is possible to define sequences $\{\underline{c}_n\}_{n \in \N} \subset \R \backslash \Theta$ and $\{\overline{c}_n\}_{n \in \N} \subset \R \backslash \Theta$ such that 
+ 	\begin{align}
+ 		\underline{c}_n \uparrow c \text{ and } \textnormal{sign}\left(g(x) - \underline{c}_n \right) \rightarrow \textnormal{sign}\left(g(x) - c \right) \text{a.e. in } \Omega \backslash \Theta\\
+ 		\overline{c}_n \downarrow c \text{ and } \textnormal{sign}\left(g(x) - \overline{c}_n \right) \rightarrow \textnormal{sign}\left(g(x) - c \right) \text{a.e. in } \Omega \backslash \Theta\\
+ 	\end{align}
+ 	as $n \rightarrow \infty$. 
+ \end{lemma}
+ 
+ \begin{lemma}(Convergence result) \label{lemma:convergence_result}
+ 	Let $\{x_n\}_{n \)in \N}$ be a sequence. If every subsequence of $\{x_n\}_{n \in \N}$ has a convergent subsequence to a common limit $x$, then the entire sequence converge to $x$. 
+ \end{lemma}
+
+\begin{proof}
+	Assume the sequence does not converge to $x$, then there must exist some subsequence of $\{x_n\}_{n \in \N}$ bounded away by $x$ by some $\epsilon > 0$. This subsequence cannot have a convergent subsequence to x, which is a contradiction. 
+\end{proof}
+
+
+
+
+\begin{definition} (Embedding)
+	
+	For two normed spaces $X$,$Y$, an embedding 
+	\begin{equation}
+		X \hookrightarrow Y
+	\end{equation}
+	is an injective bounded linear map. The map is thought of as an inclusion map from a subspace to a superspace, possibly under a different norm. 
+\end{definition}
+
+%example
+\begin{remark} (The space $\mathscr{C}\left([0,T],L^1\left(\R\right)\right)$) \label{rmk:arzela_C_space}
+	We can define the Banach space
+	\begin{equation}
+		\mathscr{C}\left([0,T],L^1\left(\R\right)\right) = \{ \left f : [0,T] \mapsto L^1(\R) \right| f \text{ continuous } \}
+	\end{equation}
+	where the continuity is interpreted as continuity between metric
+	spaces. In the topology of uniform convergence,
+	\begin{equation}
+		\norm{\cdot}_{\text{u}} = \max_{t \in [0,T]} \norm{\cdot}_{L^1(\R)},
+	\end{equation}
+	defines a norm. In fact, $\left(\mathscr{C}\left([0,T],L^1\left(\R\right)\right), \norm{\cdot}_{\text{u}}\right)$ is a Banach space. 
+	If we let $T > 0$ and $\Omega \subset [0,T] \times \R$ open, then 
+	
+	\begin{equation}
+		\left(\mathscr{C}\left([0,T],L^1\left(\R\right)\right), \norm{\cdot}_{\text{u}}\right) \hookrightarrow \left(L^1(\Omega), \norm{\cdot}_{L^1} \right)
+	\end{equation}
+	is an embedding. Let $f \in \mathscr{C}\left([0,T],L^1\left(\R\right)\right)$, then
+	\begin{equation}
+		\norm{f}_{L^1(\Omega)} = \iint_{\Omega} \left|\left(f(t)\right)(x) \right| dx dt \leq \int_0^T \norm{f}_{L^1\left(\R\right)}(t) dt \leq T \norm{f}_{u}.
+	\end{equation}
+	Therefore, $\hookrightarrow$ is a bounded. A bounded linear operator is continuous. 
+	%problem definedness, 
+\end{remark}
 
 
 
 \subsection{Results from differentiable calculus and discrete difference rules}
-We will however need some results that require the full regularity of continous differentiability. A fundamental result in differentiable calculus is the mean value theorem
+We will however need some results for continously differentiable functions. A fundamental result in differentiable calculus is the mean value theorem
 
-\begin{theorem}(The mean value theorem for $\C^{(1)}(\R)$-functions)
+\begin{theorem}(The mean value theorem for $\C^{(1)}(\R)$-functions) \label{theorem:MVT}
 	For any $f \in \mathscr{C}([a,b]) \cap \mathscr{C}^{(1)}((a,b))$ we have that 
 	
 	\begin{equation} \label{MVT}
@@ -393,32 +704,66 @@ We will however need some results that require the full regularity of continous 
 
 The following result concern functions  differentiation under the integral sign. 
 
+
 \begin{theorem}(Leibniz rule for differentiation under the integral)
+	
+	\label{thm:leib_rule_int}
 	Let  $f:\mathscr{R} x \mathscr{R} \rightarrow \mathscr{R}$ be a differentiable function such that $\frac{\partial f}{\partial t}(x,t)$
 	is continuous on $\R\times\R$. Suppose that $a, b \in \C^{(1)}(\R)$. Then
 	\begin{equation} \label{LeibRule}
 		\frac{d}{dt}\int_{a(t)}^{b(t)} f(x,t) dx = - f(a(t),t) \frac{da}{dt}(t) + f(b(t),t) \frac{db}{dt}(t) + \int_{a(t)}^{b(t)}\frac{\partial f}{\partial t}(x,t) dx. 
 	\end{equation}
 \end{theorem}
+
 Formula is taken from 
 \begin{proof}
 	See \cite[p.255]{kaplan1912advanced}. 
 \end{proof}
 
+\begin{lemma}(The inverse function lemma in one dimension) \label{lem:IVT}
+	
+	Let $f : \R \mapsto \R$ be a continuously differentiable function with a non-zero derivative at $x \in \R$, then $f$ is differentiable in some neighbourhood $I \subset \R$ of $x$ and the inverse is continuously differentiable. In addition, 
+	\begin{equation} \label{lem:IVT_formula}
+		(f^{-1})^{'}(f(x))= \frac{1}{f'(x)} \text{ for all } x \in I. 
+	\end{equation}  
+\end{lemma}
 
+A proof can be found in \eqref{rudin1976principles}, p.221. 
+
+\begin{remark} \label{rmk:IVT_order}
+	Furthermore, if $f \in \mathscr{C}^{(k)}(I)$ for some natural number $k \geq 1$, then $f^{-1} \in \mathscr{C}^{(k)}(f(I))$. $f(I)$ denotes the image of $I$ under $f$.  This can be proven by induction. By lemma \eqref{lem:IVT}, it holds for the base case $k = 1$. Assume it holds for some $\tilde{k} \in \N$ and consider \eqref{lem:IVT_formula}, rewritten as  
+	
+	\begin{equation} \label{lem:IVT_formula2}
+		(f^{-1})^{'}(f) f'(f^{-1}(f)})= 1 \text{ for all } f \in f(I).
+	\end{equation}
+	
+	As $f \in \mathscr{C}^{(\tilde{k}+1)}$, then $f^{-1} \in \mathscr{C}^{(\tilde{k})}$, by the induction hypotesis. We can differentiate the left- and right-hand side if \eqref{lem:IVT_formula2} $\tilde{k}$ times using the chain rule and composition rule for differentiation. After differentiating $\tilde{k}$ times, we have an equation of the form 
+	
+	\begin{equation}\label{rmk:IVT_formula3}
+		(f^{-1})^{(\tilde{k})}(f) f^{'}(f^{-1}(f)) + H_{\tilde{k}}(f^{(1)},...,f^{(\tilde{k})}, g^1, ..., g^{(\tilde{k}-1)}) = 0 \text{ for all } f \in f(I).
+	\end{equation}
+	The $H_\tilde{k}$-term corresponds to some additive and multiplicative combination of continuously differentiable functions, and is therefore continuously differentiable. $H_\tilde{k}$ depends on order of differentiation $\tilde{k}$. By assumption, $f^{'}(x)$ is bounded away from zero on $I$ and is continuously differentiable, so we get an explicit expression for $(f^{-1})^{(\tilde{k})}(f)$, 
+	
+	\begin{equation}\label{rmk:IVT_formula4}
+		(f^{-1})^{(\tilde{k})}(f) = - \frac{H_{\tilde{k}}(f^{(1)},...,f^{(\tilde{k})}, g^1, ..., g^{(\tilde{k}-1)})}{f^{'}(f^{-1}(f))} \in \mathscr{C}^{(1)}({f(I)}), 
+	\end{equation}
+	and $f^{-1} \in \mathscr{C}^{(\tilde{k}+1)}(f(I))$. 
+\end{remark}
+
+\iffalse
 A generalisation of the mean-value formula for a closed interval $[a,b]$ reads:
 \begin{equation}\label{genMVT}
 	\int_a^bf(x)g(x)dx = f(c) \int_a^b g(x) dx, c \in (a,b), 
 \end{equation}
 where $f \in \mathscr{C}([a,b])$ and $g \in L_1([a,b])$, in the sense of lebesgue measure. 
 
+
+
 A Grönwall type estimate.
 \newtheorem{theorem}[T
 heorem]
 
-\begin{theorem}[Da theorem]
-	This statement is true, I guess.
-\end{theorem}
+
 
 \begin{lemma}{A simple Grönwall type estimate}
 	\begin{equation}
@@ -434,22 +779,25 @@ This can be proved using integrating factors and integrating on both sides.
 \end{align}
 The preceding theorem holds for any absolutely continuous function, in particular it will hold for a Lipshchitz continuous functions. 
 
-The following formula is very simple, but will be used extensively. It is the formula for splitting the terms of a difference 
+\fi
 
-\begin{formula}(Difference by parts)
+The following formula is very simple, but will be used often.
+
+\begin{formula}(Difference by parts) 
 	
 	For $x_0, x_1,y_0, y_1 \in \R$, 
-	\begin{equation} \label{disc_diff_part}
+	\begin{equation} \label{disc_diff_part1}
 		x_1y_1 - x_0 y_0 = x_1 \left(y_1 - y_0\right) + y_0 \left(x_1 - x_0\right).
 	\end{equation}
-	This can be generalised to hold over finite sums over $\R$. Let $x_i, y_i$ for $i \in \{1,...,N\}$, and let $\Delta_+(x_i) = x_{i+1} - x_i$. Then 
+	This can be generalised to hold over finite sums over $\R$. Let $x_i, y_i \in \R$  for $i \in \{1,...,N\}$, and let $\Delta_+(x_i) = x_{i+1} - x_i$. Then 
 	
-	\begin{equation} \label{discreteDiffPart}
+	\begin{equation} \label{disc_diff_part2}
 		x_{N}y_{N} - x_{1}y_{1} = \sum_{i = 1}^{N-1} x_i \Delta_+(y_i) + \sum_{i = 1}^{N-1} y_{i+1}\Delta_+(x_i).
 	\end{equation}
 	The last formula can be seen from expanding the terms on the right, which yields a telescoping sum. 
 \end{formula}
 
+\iffalse
 $\mathscr{P} = \{\{x_0, ..., x_N\} \subset \R$ for $N \in \mathscr{N}$ | $x_0 < x_1 < ... < x_N \}$ is the set of ordered partition of $\R$. For $p \in \mathscr{P}$, define
 \begin{equation}
     p(f) = \sum_{i=0}^{\vert p\vert -1} |f(x_{i+1}) - f(x_i)|,
@@ -464,8 +812,108 @@ is the total variation of $f$. If supremum does not exist, we say that $TV(f) = 
 \begin{equation}
 TV(f)     
 \end{equation}
+\fi 
 
-\section{Mollifier}
+\section{Solution concepts for hyperbolic conservation laws in one dimension}
+
+Consider the one-dimensional scalar conservation law 
+
+\begin{equation} \label{def:inhom_cons_law}
+	\rho_t + (k(z)f(\rho))_z = 0,\quad \rho(z,0) = \rho_0(z)
+\end{equation}
+where $k \in \mathscr{C}^1(\R)$ and $f$ is Lipschitz continuous. 
+The solution concepts that will be used in the present paper are weak solutions and the Kružkov entropy solution. One of the prime motiviations for the weak solution concept is that classical solutions of \eqref{def:inhom_cons_law} develop discontinuities in finite time. One example of which is the Burgers's equation \cite[exampel 1.3][p.5]{holden2015front}. A classical solution concept does not allow for discontinuities. However, some discontinous solutions can be found to be physically permissible, such as shock waves see \cite[example1.4, p]{holden2015front}. The weak solution concept allows for discontinutites, and imposes the well-known jump condition on such discontinuities. p.9 \cite{holden2015front}. 
+
+A weak solution is a function $\rho \in L^1_{\text{loc}}(\R^+_0 \times \R) \cap L^\infty\left(\R^+_0 \times \R\right)$ which satisfies \eqref{def:inhom_cons_law} distributionally, in the following sense 
+
+%endre på alle småtinga (\R_0^+ \times \R)
+\begin{definition}(Weak solution of space-dependent scalar conservation law)\label{def:weak_solution}
+	
+	Let $\rho \in L_{\text{loc}}^1(\R^+_0 \times \R) \cap L^\infty(\R^+_0 \times \R)$ satisfy
+	
+	\begin{equation} \label{def}
+		\int_{\R_0^+}\int_{\R} \rho \phi_t + k(z) f(\rho) \phi_z dz dt + \int_{\R} \phi(z,0) \rho(z,0) dz= 0 \quad \forall \phi \in \mathscr{C}^\infty_c(\R^+_0 \times \R),
+	\end{equation}
+	then we call $\rho$ a weak solution of \eqref{def:inhom_cons_law}. 
+\end{definition} 
+
+An issue with the concept of weak solution is the fact they are not unique. For example,  
+\begin{numcases}{\rho(z,t) = }
+	1 &\text{ for } z \leq (1-\alpha)t/2,  \nonumber\\
+	-\alpha &\text{ for } (1-\alpha)t/2 < z   \leq 0,  \nonumber\\
+	\alpha &\text{ for } 0 < z \leq \left(\alpha -1 \right) t/2, \nonumber\\
+	-1 &\text{ for } z \geq \left(\alpha - 1\right)t/2 \nonumber
+\end{numcases}
+is a weak solution of 
+\begin{equation}
+	\rho_t + \left(\frac{1}{2}\rho^2\right)_z = 0, \text{ for } \rho(z,t) = \begin{cases}
+		1 \text{ for } z \leq 0,\\
+		-1\text{ for } z >0,  
+	\end{cases}
+\end{equation}
+for all $\alpha \geq 1$. Which solution should be picked? Taken from exercise 1.9, page 49 in \cite{holden2015front}. The concept of mathematical entropy can be used restrict the number of feasible solution. One such notion is that of the Kružkov entropy solution
+
+\begin{definition}(Kružkov entropy solution for space-dependent flux)
+	
+	Assume $k$ to be continously differentiable. Let  $c \in \R$. We call  $\rho \in L^1\left(\R^+_0 \times \R\right) \cap L^\infty\left(\R^+_0 \times \R\right)$ a weak- or Kružkov entropy solution, if it satisfies
+	\begin{align}
+		\partial_t \left|\rho - c\right| + \partial_z \left(k(z) \sgn( \rho - c ) \left(f(\rho) - f(c)\right)\right) + \text{sign}(\rho - c) k'(z) f(c) \leq 0, 
+	\end{align}
+	in the distributional sense.  This means that for $\phi \in \mathscr{C}^\infty_c(\R^+_0 \times \R), \, \, \phi \geq 0$, then 
+	\begin{align} \label{entropy_sol}
+		\int_{\R_0^+}&\int_{\R} \left|\rho - c\right| \phi_t + k(z) \sgn( \rho - c ) \left(f(\rho) - f(c)\right) \phi_z dz dt \\&+\int_\R \left| \rho(z,0) - c \right| dz \geq \int_{\R_0^+}\int_{\R}\text{sign}(\rho - c) k'(z) f(c) \phi dx dt. 
+	\end{align}
+\end{definition}
+
+The entropy solution is unique. 
+
+\begin{theorem}(Uniqueness of Kružkov entropy solution) \label{thm:kruzkov_uniqueness}
+	Assume that $f$ is Lipschitz, and let $u,v \in L^1\left(\R^+_0 \times \R\right) \cap L^\infty\left(\R^+_0 \times \R\right)$ be weak solutions of \eqref{def:inhom_cons_law} for initial values $u_0$ and $v_0$. If both are Kružkov entropy solution, then 
+	\begin{equation}
+		\norm{u(\cdot, t) - v(\cdot, t)}_{L^1} \leq \norm{u_0 - v_0}_{L^1}
+	\end{equation}
+	In particular, if $u_0 = v_0$, then u = v. 
+\end{theorem}
+	
+Theorem \eqref{thm:kruzkov_uniqueness} was given as exercise 2.7,c), 91, , and adjusts proposition 2.10, p.79. 
+
+\begin{remark}
+	Under the stated assumptions for  Kružkov entropy solution is also a weak solution. An existence proof can be found in \cite{holden2015front}, theorem 8.21, p.812. 
+\end{remark}
+
+\subsection{Existence and uniqeness of systems of ordinary differential equation}
+
+The following theorem is included to ensure existence of the solution of the FtL model. Taken from 3.2.1 \cite{david2018ordinary}, page 82. 
+\begin{theorem}(Existence and uniqueness)
+	
+	Consider the cauchy problem
+	
+	\begin{equation} \label{IVP}
+		\frac{dx}{dt} = F(x), \,\,\, x(0)  \in \R^d
+	\end{equation}
+
+	Let $U \subset \R^d$ be open and contain the initial data $x(0)$, and let F : $U \mapsto \R^d$ be locally Lipschitz. Then there exists and interval $(-\eta, \eta)$ and a $\mathscr{C}^1$ function x : $(-\eta, \eta) \mapsto U$ such that x solves \eqref{IVP}. 
+	
+	The solution $x$ is unique.
+\end{theorem}
+
+
+
+
+
+
+
+\iffalse
+
+ One can therefore introduce a 
+
+
+
+\begin{equation}
+	\xi(\rho^{\epsilon})_t + k(x) \xi^{'}(\rho^{\epsilon}) f^{'}(\rho^{\epsilon})\rho^{\epsilon}_x + k^{'}(\rho^{\epsilon})(x)\xi^{'}f(\rho^{\epsilon}) = \epsilon \xi^{\rho}(\rho^{\epsilon}) \frac{\partial^2 \rho^\epsilon}{\partial^2x}. 
+\end{equation}
+
+
 A smooth approximation to the identity, or mollifier, is a useful tool for creating smooth approximations. A mollifier can be defined as a function which satisfies
 
 \begin{align}
@@ -475,7 +923,11 @@ A smooth approximation to the identity, or mollifier, is a useful tool for creat
 \end{align}
 
 forklar hvorfor antakelsene er rimelige. hva veivesenet gjør.
+\fi
 
+
+
+\iffalse
 \section{Differentiation Identities and Calculus}
 A useful result in the manipulation of differences is splitting of the sum. For any pair of indexed quantities, $x_0, x_1,y_0, y_1$, 
 \begin{equation} \label{disc_diff_part}
@@ -540,6 +992,8 @@ smooth with compact support,and therefore their convolution with any element fun
 
 Hysteresis?
 
+
+
 \section{On the microscopic and macroscopic models}
 
 
@@ -572,6 +1026,7 @@ begin{equation}
 
 mass across the region, modeled respectively by the first and second term. 
 
+IverSON BRACKET!
 
 The variables are surpressed
 Thus, macroscopic models are able to describe.  
@@ -593,30 +1048,52 @@ Why macroscopic models are useful.
     - only interested in macroscopic quantities 
     - Computation time of simulation is critical. 
 More can be found in Martin Treiber • Arne Kesting, Traffic Flow dynamics. 
-\section{Notation}
+\fi 
+
+\section{Notation table}
+
 
 \begin{tabular}{r c p{10cm} }
-\toprule
-$\rightrightarrows$ & $\triangleq$ & everywhere uniform convergence $i$\\
-$f_j$ & $\triangleq$ & $f(z_j)$ for any function that takes an indexed arg\\
-$\text{T.V.}_x(\cdot)$ & $\triangleq$ & The total variation in the $x-$ direction.\\
-$\C^{0,1}(\Omega)$ & $\triangleq$ & The space of Lipschitz continuous functions over $\Omega$\\ 
-$\Delta_+(x_i)$ & $\triangleq$ & $x_{i+1} - x_{i}$ The forward difference operator\\
-$D_+(x_i)$ & $\triangleq$ & $\frac{x_{i+1} - x_{i}}{l}$ A forward difference operator, that divide on the car length\\  
-$D_+^z(x_i)$ & $\triangleq$ & $\frac{x_{i+1} - x_{i}}{z_{i+1/2}-z_{i-1/2}}$ A forward difference operator.\  
+	\toprule
+	$\rightarrow$ & $\triangleq$ & General convergence, should be specified.\\
+	$\rightrightarrows$ & $\triangleq$ & everywhere uniform convergence $i$.\\
+	$f_j$ & $\triangleq$ & $f(z_j)$ for any function that takes an indexed argument.\\
+	$\Delta_+(x_i)$ & $\triangleq$ & $x_{i+1} - x_{i}$ The forward difference operator.\\
+	$D_+(x_i)$ & $\triangleq$ & $\frac{x_{i+1} - x_{i}}{l}$ The forward difference divided by the car length.\\  
+	$D_+^z(x_i)$ & $\triangleq$ & $\frac{x_{i+1} - x_{i}}{z_{i+1/2}-z_{i-1/2}}$ The forward difference divided by bumper-to-bumper distance.\\  
+	$[\cdot]$ & $\triangleq$ & The Iverson bracket. Evaluates to 1 if true and 0 if false. Alternative notation for the indicator function.\\
+	\multicolumn{3}{c}{}\\
+	\multicolumn{3}{c}{\underline{Function spaces}}\\
+	\multicolumn{3}{c}{}\\
+	$\mathscr{C}(\Omega)$ & $\triangleq$ & The space of continuous functions on $\Omega$.\\ 
+	$\mathscr{C}^{0,1}(\Omega)$ & $\triangleq$ & The space of Lipschitz continuous functions on $\Omega$.\\
+	$\mathscr{C}}^{(k)}(\Omega)$ & $\triangleq$ & The space of continuously differentiable functions on $\Omega$.\\
+$\mathscr{C}^\infty(\Omega) & \triangleq$ & $\bigcap_{i=0}^{\infty} \mathscr{C}^{(k)}(\Omega)$\\
+$\mathscr{C}_c(\Omega)$ & $\triangleq$ & The space of continuous functions with compact support.\\ 
+$\mathscr{C}_c^{(k)}(\Omega)$ & $\triangleq$ & $\mathscr{C}^{(k)}(\Omega) \cap \mathscr{C}_c(\Omega)$\\
+$\mathscr{C}_c^\infty(\Omega)$ & $\triangleq$ & $\mathscr{C}^{\infty}(\Omega) \cap \mathscr{C}_c(\Omega)$\\
+$\text{B.V.}(\Omega)$ & $\triangleq$ & The space of functions with bounded total variation.\\
+$\text{T.V.}_x(f)$ & $\triangleq$ & Returns the total variation of $f$ in the $x-$ direction.\\
+$L^1(\Omega)\right)$ & $\triangleq$ & The space of integrable functions on $\Omega$.\\
+$\mathscr{C}\left([0,T], L^1(\R)\right)$ & $\triangleq$ & The space of continuous functions from $[0,T]$ to $L^1(\R)\right)$. 
+
 \multicolumn{3}{c}{}\\
-\multicolumn{3}{c}{\underline{Decision Variables}}\\
+\multicolumn{3}{c}{\underline{Miscellaneous}}\\
 \multicolumn{3}{c}{}\\
-$y_f$ & $=$ & \(\begin{cases}
-1,  & \text{if Supplier located at site $f$ is open} \\
-0,  & \text{otherwise} \end{cases}\)\\
+$\interior{X}$ & $\triangleq$ & The interior of the set $X$.  \\
+$\R$ & $\triangleq $ & The real line. \\
+$\N$ & $\triangleq $ & The natural numbers. \\
+$\mathscr{Z}$ & $\triangleq $ & The integers. \\
+$\R^+_0$ & $\triangleq $ & The interval $[0, \infty).$ \\
+$X \times Y$ & $\triangleq$ & The cartesian product of X and Y. \\
 \bottomrule
 \end{tabular}
 
-
+\iffalse
 Over the years, several thesis templates for \LaTeX{} have been developed by different groups at NTNU. Typically, there have been local templates for given study programmes, or different templates for the different study levels – bachelor, master, and \acrshort{phd}.\footnote{see, e.g., \url{https://github.com/COPCSE-NTNU/bachelor-thesis-NTNU} and \url{https://github.com/COPCSE-NTNU/master-theses-NTNU}}
 
 Based on this experience, the \acrfull{CoPCSE}\footnote{\url{https://www.ntnu.no/wiki/display/copcse/Community+of+Practice+in+Computer+Science+Education+Home}} is hereby offering a template that should in principle be applicable for theses at all study levels. It is closely based on the standard \LaTeX{} \texttt{report} document class as well as previous thesis templates. Since the central regulations for thesis design have been relaxed – at least for some of the historical university colleges now part of NTNU – the template has been simlified and put closer to the default \LaTeX{} look and feel.
 
 The purpose of the present document is threefold. It should serve (i) as a description of the document class, (ii) as an example of how to use it, and (iii) as a thesis template.
 
+\fi
